@@ -12,5 +12,9 @@ data class SavedBook(
     val publisher: String,
     val thumbnail: String,
     val price: Int,
-    val contents: String
+    val contents: String,
+
+    var readingStatus: String = "읽기 전",
+    var memo: String = "",                  // 감상 메모
+    var completedDate: String = ""
 )

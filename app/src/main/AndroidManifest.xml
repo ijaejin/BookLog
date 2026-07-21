@@ -27,6 +27,10 @@
             android:name=".ui.SearchActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".MyLibraryActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

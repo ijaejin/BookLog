@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Delete
+import androidx.room.Update
 import com.example.myapplication.data.SavedBook
 
 @Dao
@@ -21,4 +22,7 @@ interface BookDao {
 
     @Query("SELECT EXISTS(SELECT 1 FROM saved_books WHERE isbn = :isbn)")
     suspend fun isBookSaved(isbn: String): Boolean
+
+    @Update
+    suspend fun updateBook(book: SavedBook)
 }

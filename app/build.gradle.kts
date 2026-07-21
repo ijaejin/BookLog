@@ -3,6 +3,8 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    // alias(libs.plugins.kotlin.compose) (재진)
+
     id("com.google.devtools.ksp")
 }
 
@@ -56,9 +58,12 @@ dependencies {
 
     implementation("androidx.recyclerview:recyclerview:1.3.2")
 
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4")
+
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
