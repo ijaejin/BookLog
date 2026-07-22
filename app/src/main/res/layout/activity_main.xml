@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- 제목 -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
@@ -20,6 +21,7 @@
         app:layout_constraintBottom_toTopOf="@id/btnGoSearch"
         app:layout_constraintVertical_chainStyle="packed" />
 
+    <!-- 도서 검색 -->
     <Button
         android:id="@+id/btnGoSearch"
         android:layout_width="200dp"
@@ -28,9 +30,9 @@
         android:text="도서 검색"
         app:layout_constraintTop_toBottomOf="@id/tvTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnMyLibrary" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- 내 서재 -->
     <Button
         android:id="@+id/btnMyLibrary"
         android:layout_width="200dp"
@@ -39,16 +41,27 @@
         android:text="내 서재"
         app:layout_constraintTop_toBottomOf="@id/btnGoSearch"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnSettings" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- 게시판 -->
+    <Button
+        android:id="@+id/btnBoard"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="게시판"
+        app:layout_constraintTop_toBottomOf="@id/btnMyLibrary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 설정 -->
     <Button
         android:id="@+id/btnSettings"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="설정"
-        app:layout_constraintTop_toBottomOf="@id/btnMyLibrary"
+        app:layout_constraintTop_toBottomOf="@id/btnBoard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

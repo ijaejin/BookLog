@@ -5,9 +5,18 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- 뒤로가기 버튼 -->
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="← 뒤로가기" />
+
+    <!-- 검색 영역 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:orientation="horizontal">
 
         <EditText
@@ -25,6 +34,7 @@
 
     </LinearLayout>
 
+    <!-- 검색 결과 -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBooks"
         android:layout_width="match_parent"

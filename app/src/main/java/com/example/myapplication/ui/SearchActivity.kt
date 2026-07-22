@@ -27,22 +27,33 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+        val btnBack = findViewById<Button>(R.id.btnBack)
         val etSearch = findViewById<EditText>(R.id.etSearch)
         val btnSearch = findViewById<Button>(R.id.btnSearch)
         val rvBooks = findViewById<RecyclerView>(R.id.rvBooks)
 
+        btnBack.setOnClickListener {
+            finish()
+        }
+
         adapter = BookAdapter(bookList) { book ->
             showBookDetailDialog(book)
         }
+
         rvBooks.layoutManager = LinearLayoutManager(this)
         rvBooks.adapter = adapter
 
         btnSearch.setOnClickListener {
             val query = etSearch.text.toString().trim()
+
             if (query.isNotEmpty()) {
                 searchBooks(query)
             } else {
-                Toast.makeText(this, "검색어를 입력하세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "검색어를 입력하세요",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -54,12 +65,22 @@ class SearchActivity : AppCompatActivity() {
                     apiKey = "KakaoAK ${BuildConfig.KAKAO_API_KEY}",
                     query = query
                 )
+
                 adapter.updateBooks(response.documents)
+
                 if (response.documents.isEmpty()) {
-                    Toast.makeText(this@SearchActivity, "검색 결과가 없습니다", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@SearchActivity,
+                        "검색 결과가 없습니다",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@SearchActivity, "검색 실패: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@SearchActivity,
+                    "검색 실패: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -71,7 +92,7 @@ class SearchActivity : AppCompatActivity() {
                 "저자: ${book.authors.joinToString(", ")}\n" +
                         "출판사: ${book.publisher}\n" +
                         "가격: ${book.price}원\n\n" +
-                        "${book.contents}"
+                        book.contents
             )
             .setPositiveButton("내 서재에 저장") { _, _ ->
                 saveBookToLibrary(book)
@@ -83,6 +104,7 @@ class SearchActivity : AppCompatActivity() {
     private fun saveBookToLibrary(book: Book) {
         lifecycleScope.launch {
             val db = AppDatabase.getDatabase(this@SearchActivity)
+
             val savedBook = SavedBook(
                 isbn = book.isbn,
                 title = book.title,
@@ -92,8 +114,14 @@ class SearchActivity : AppCompatActivity() {
                 price = book.price,
                 contents = book.contents
             )
+
             db.bookDao().insertBook(savedBook)
-            Toast.makeText(this@SearchActivity, "내 서재에 저장했습니다", Toast.LENGTH_SHORT).show()
+
+            Toast.makeText(
+                this@SearchActivity,
+                "내 서재에 저장했습니다",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }
