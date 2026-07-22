@@ -57,7 +57,7 @@ class MyLibraryActivity : AppCompatActivity() {
                 // 감상 메모
                 val inputMemo = EditText(context).apply {
                     hint = "감상 메모를 입력하세요"
-                    setText(book.memo ?: "") // 기존 메모
+                    setText(book.memo) // 기존 메모
                 }
                 layout.addView(inputMemo)
 
