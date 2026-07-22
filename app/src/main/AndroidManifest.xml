@@ -14,6 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".ui.board.BoardDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.board.BoardWriteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.board.BoardListActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -22,15 +31,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.SearchActivity"
             android:exported="false" />
-
         <activity
             android:name=".MyLibraryActivity"
             android:exported="false" />
-
     </application>
 
 </manifest>
