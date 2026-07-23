@@ -3,14 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/booklog_bg">
 
     <!-- 뒤로가기 버튼 -->
     <Button
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="← 뒤로가기" />
+        android:text="← 뒤로가기"
+        android:backgroundTint="@color/booklog_brown"/>
 
     <!-- 검색 영역 -->
     <LinearLayout
@@ -30,7 +32,8 @@
             android:id="@+id/btnSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="검색" />
+            android:text="검색"
+            android:backgroundTint="@color/booklog_brown"/>
 
     </LinearLayout>
 

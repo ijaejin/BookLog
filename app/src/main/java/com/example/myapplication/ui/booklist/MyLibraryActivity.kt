@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.ui.booklist
 
 import android.os.Bundle
 import android.widget.EditText
@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.ui.booklist.MyLibraryAdapter
+import com.example.myapplication.R
 import com.example.myapplication.data.SavedBook
 import com.example.myapplication.db.AppDatabase
 import com.example.myapplication.repository.BookRepository
@@ -28,7 +28,7 @@ class MyLibraryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_my_library)
 
         // AppDatabase와 Repository 연결
-        val database = AppDatabase.getDatabase(applicationContext)
+        val database = AppDatabase.Companion.getDatabase(applicationContext)
         val repository = BookRepository(database.bookDao())
 
         val factory = object : ViewModelProvider.Factory {

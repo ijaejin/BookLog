@@ -35,7 +35,7 @@
             android:name=".ui.SearchActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.myapplication.MyLibraryActivity"
+            android:name="com.example.myapplication.ui.booklist.MyLibraryActivity"
             android:exported="false" />
     </application>
 

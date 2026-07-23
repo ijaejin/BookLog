@@ -4,7 +4,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/booklog_bg">
 
     <TextView
         android:id="@+id/tvBoardTitle"
@@ -31,7 +32,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="감상나눔" />
+            android:text="감상나눔"
+            android:backgroundTint="@color/booklog_brown"/>
 
         <Button
             android:id="@+id/btnShareTab"
@@ -39,7 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:text="책나눔" />
+            android:text="책나눔"
+            android:backgroundTint="@color/booklog_brown"/>
 
     </LinearLayout>
 
