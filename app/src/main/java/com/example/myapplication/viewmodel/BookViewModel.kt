@@ -30,7 +30,7 @@ class BookViewModel(private val repository: BookRepository) : ViewModel() {
     }
 
     // 책 상태 업데이트
-    fun updateBookSatus(book: SavedBook, newStatus: String, newMemo: String) {
+    fun updateBookStatus(book: SavedBook, newStatus: String, newMemo: String) {
         val newCompletedDate = if (newStatus == "완독") {
             if(book.readingStatus != "완독") System.currentTimeMillis().toString() else book.completedDate
         } else {

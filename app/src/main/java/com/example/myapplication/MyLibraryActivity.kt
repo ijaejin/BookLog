@@ -71,7 +71,7 @@ class MyLibraryActivity : AppCompatActivity() {
 
 
                         // DB 업데이트 함수 호출
-                        bookViewModel.updateBookSatus(book, newStatus, newMemo)
+                        bookViewModel.updateBookStatus(book, newStatus, newMemo)
                         Toast.makeText(context, "수정되었습니다.", Toast.LENGTH_SHORT).show()
                     }
                     .setNegativeButton("취소", null)
