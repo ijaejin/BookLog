@@ -1,24 +1,31 @@
 package com.example.myapplication.db
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Delete
-import com.example.myapplication.data.SavedBook
+import androidx.room.Update
+import com.example.myapplication.data.Book
 
 @Dao
 interface BookDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertBook(book: SavedBook)
+    suspend fun insertBook(book: Book)
 
-    @Query("SELECT * FROM saved_books ORDER BY title ASC")
-    suspend fun getAllBooks(): List<SavedBook>
+    @Update
+    suspend fun updateBook(book: Book)
 
     @Delete
-    suspend fun deleteBook(book: SavedBook)
+    suspend fun deleteBook(book: Book)
 
-    @Query("SELECT EXISTS(SELECT 1 FROM saved_books WHERE isbn = :isbn)")
+    @Query("SELECT * FROM books ORDER BY startDate DESC")
+    suspend fun getAllBooks(): List<Book>
+
+    @Query("SELECT * FROM books WHERE isbn = :isbn LIMIT 1")
+    suspend fun getBookByIsbn(isbn: String): Book?
+
+    @Query("SELECT EXISTS(SELECT 1 FROM books WHERE isbn = :isbn)")
     suspend fun isBookSaved(isbn: String): Boolean
 }

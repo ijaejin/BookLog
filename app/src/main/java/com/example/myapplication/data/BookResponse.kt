@@ -2,12 +2,12 @@ package com.example.myapplication.data
 
 // 카카오 도서 검색 API 전체 응답
 data class BookResponse(
-    val documents: List<Book>,
+    val documents: List<BookItem>,
     val meta: Meta
 )
 
-// 검색 결과 도서 한 권
-data class Book(
+// 검색 결과 도서 한 권 (API 응답 전용)
+data class BookItem(
     val title: String,
     val contents: String,
     val authors: List<String>,

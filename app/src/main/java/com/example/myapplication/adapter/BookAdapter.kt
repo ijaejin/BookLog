@@ -8,11 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
-import com.example.myapplication.data.Book
+import com.example.myapplication.data.BookItem
 
 class BookAdapter(
-    private val books: MutableList<Book>,
-    private val onItemClick: (Book) -> Unit
+    private val books: MutableList<BookItem>,
+    private val onItemClick: (BookItem) -> Unit
 ) : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
 
     inner class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -42,7 +42,7 @@ class BookAdapter(
 
     override fun getItemCount(): Int = books.size
 
-    fun updateBooks(newBooks: List<Book>) {
+    fun updateBooks(newBooks: List<BookItem>) {
         books.clear()
         books.addAll(newBooks)
         notifyDataSetChanged()
