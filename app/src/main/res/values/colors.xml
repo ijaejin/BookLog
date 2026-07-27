@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="booklog_brown">#713600</color>   <!-- 짙은 갈색 -->
+    <color name="booklog_orange">#C05800</color>  <!-- 오렌지 브라운 -->
+    <color name="booklog_bg">#FDFBD4</color>      <!-- 크림색 (배경용) -->
+    <color name="booklog_dark">#38240D</color>    <!-- 아주 어두운 고동색 (글자용) -->
 </resources>
