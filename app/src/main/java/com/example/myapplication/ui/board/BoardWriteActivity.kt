@@ -1,8 +1,10 @@
 package com.example.myapplication.ui.board
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.R
@@ -34,33 +36,96 @@ class BoardWriteActivity : AppCompatActivity() {
         etExchangeStatus = findViewById(R.id.etExchangeStatus)
         btnSave = findViewById(R.id.btnSave)
 
-        // 게시판 종류에 따라 입력칸 표시
         if (boardType == "REVIEW") {
-            etRating.visibility = EditText.VISIBLE
-            etExchangeStatus.visibility = EditText.GONE
+            etRating.visibility = View.VISIBLE
+            etExchangeStatus.visibility = View.GONE
         } else {
-            etRating.visibility = EditText.GONE
-            etExchangeStatus.visibility = EditText.VISIBLE
+            etRating.visibility = View.GONE
+            etExchangeStatus.visibility = View.VISIBLE
         }
 
         btnSave.setOnClickListener {
 
+            val title = etTitle.text.toString().trim()
+            val bookTitle = etBookTitle.text.toString().trim()
+            val content = etContent.text.toString().trim()
+            val ratingText = etRating.text.toString().trim()
+            val exchangeStatus = etExchangeStatus.text.toString().trim()
+
+            if (title.isBlank()) {
+                etTitle.error = "제목을 입력하세요."
+                etTitle.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (bookTitle.isBlank()) {
+                etBookTitle.error = "책 제목을 입력하세요."
+                etBookTitle.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (content.isBlank()) {
+                etContent.error = "내용을 입력하세요."
+                etContent.requestFocus()
+                return@setOnClickListener
+            }
+
+            val rating = if (boardType == "REVIEW") {
+                if (ratingText.isBlank()) {
+                    null
+                } else {
+                    val parsedRating = ratingText.toFloatOrNull()
+
+                    if (parsedRating == null || parsedRating !in 0f..5f) {
+                        etRating.error = "평점은 0점부터 5점 사이로 입력하세요."
+                        etRating.requestFocus()
+                        return@setOnClickListener
+                    }
+
+                    parsedRating
+                }
+            } else {
+                null
+            }
+
             val post = BoardPost(
                 boardType = boardType,
-                title = etTitle.text.toString(),
-                content = etContent.text.toString(),
-                bookTitle = etBookTitle.text.toString(),
-                rating = etRating.text.toString().toFloatOrNull(),
-                exchangeStatus = etExchangeStatus.text.toString()
+                title = title,
+                content = content,
+                bookTitle = bookTitle,
+                rating = rating,
+                exchangeStatus = if (boardType == "EXCHANGE") {
+                    exchangeStatus
+                } else {
+                    ""
+                }
             )
 
-            lifecycleScope.launch {
-                AppDatabase
-                    .getDatabase(this@BoardWriteActivity)
-                    .boardDao()
-                    .insertPost(post)
+            btnSave.isEnabled = false
 
-                finish()
+            lifecycleScope.launch {
+                try {
+                    AppDatabase
+                        .getDatabase(this@BoardWriteActivity)
+                        .boardDao()
+                        .insertPost(post)
+
+                    Toast.makeText(
+                        this@BoardWriteActivity,
+                        "게시글이 등록되었습니다.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    finish()
+                } catch (e: Exception) {
+                    btnSave.isEnabled = true
+
+                    Toast.makeText(
+                        this@BoardWriteActivity,
+                        "게시글 등록에 실패했습니다.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }

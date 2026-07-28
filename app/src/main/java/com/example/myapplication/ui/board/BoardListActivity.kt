@@ -2,14 +2,16 @@ package com.example.myapplication.ui.board
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.db.AppDatabase
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
 class BoardListActivity : AppCompatActivity() {
@@ -18,6 +20,8 @@ class BoardListActivity : AppCompatActivity() {
     private lateinit var btnReviewTab: Button
     private lateinit var btnShareTab: Button
     private lateinit var fabWrite: FloatingActionButton
+    private lateinit var fabBack: FloatingActionButton
+    private lateinit var tvEmpty: TextView
     private lateinit var adapter: BoardAdapter
 
     private var currentBoardType = "REVIEW"
@@ -30,6 +34,8 @@ class BoardListActivity : AppCompatActivity() {
         btnReviewTab = findViewById(R.id.btnReviewTab)
         btnShareTab = findViewById(R.id.btnShareTab)
         fabWrite = findViewById(R.id.fabWrite)
+        fabBack = findViewById(R.id.fabBack)
+        tvEmpty = findViewById(R.id.tvEmpty)
 
         adapter = BoardAdapter(emptyList()) { post ->
             val intent = Intent(this, BoardDetailActivity::class.java)
@@ -55,6 +61,10 @@ class BoardListActivity : AppCompatActivity() {
             intent.putExtra("boardType", currentBoardType)
             startActivity(intent)
         }
+
+        fabBack.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onResume() {
@@ -70,6 +80,14 @@ class BoardListActivity : AppCompatActivity() {
                 .getPostsByType(currentBoardType)
 
             adapter.updatePosts(posts)
+
+            if (posts.isEmpty()) {
+                tvEmpty.visibility = View.VISIBLE
+                recyclerBoard.visibility = View.GONE
+            } else {
+                tvEmpty.visibility = View.GONE
+                recyclerBoard.visibility = View.VISIBLE
+            }
         }
     }
 }

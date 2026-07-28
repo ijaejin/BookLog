@@ -4,12 +4,20 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.myapplication.data.BoardPost
 import com.example.myapplication.data.Book
+import com.example.myapplication.db.BoardDao
+import com.example.myapplication.db.BookDao
 
-@Database(entities = [Book::class], version = 2, exportSchema = false)
+@Database(
+    entities = [Book::class, BoardPost::class],
+    version = 3,
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun bookDao(): BookDao
+    abstract fun boardDao(): BoardDao
 
     companion object {
         @Volatile
@@ -24,6 +32,7 @@ abstract class AppDatabase : RoomDatabase() {
                 )
                     .fallbackToDestructiveMigration()
                     .build()
+
                 INSTANCE = instance
                 instance
             }
